@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "950048688617",
+    "project_id": "appmaroto-c0fb5",
+    "storage_bucket": "appmaroto-c0fb5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950048688617:android:44b0834d9477563ad4e378",
+        "android_client_info": {
+          "package_name": "com.example.appmaroto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "950048688617-mj4t5itg3rhukaindc23n09d52jafl8v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.appmaroto",
+            "certificate_hash": "5a97fadd02b2693c1642ccf9179b6e8bdb530cfa"
+          }
+        },
+        {
+          "client_id": "950048688617-lpabqf6hp9op0kdkuip1suosago80bbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwI4N-zptQLcveAtIRH57_RhuyoiWxO-A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "950048688617-lpabqf6hp9op0kdkuip1suosago80bbp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
