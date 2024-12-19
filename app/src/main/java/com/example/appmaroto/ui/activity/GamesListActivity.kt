@@ -16,7 +16,9 @@ import com.example.appmaroto.model.Game
 import com.example.appmaroto.snackbar
 import com.example.appmaroto.ui.recycler.GamesAdapter
 import com.example.appmaroto.ui.recycler.OnGameClickListener
+import com.google.firebase.messaging.FirebaseMessaging
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.concurrent.thread
 
 class GamesListActivity : AppCompatActivity() {
 
@@ -89,6 +91,9 @@ class GamesListActivity : AppCompatActivity() {
         binding.buttonLogout.setOnClickListener{
             viewModel.logout()
             this.googleSignInClient().signOut()
+            thread{
+                FirebaseMessaging.getInstance().deleteToken()
+            }
             finish()
         }
 
@@ -98,6 +103,14 @@ class GamesListActivity : AppCompatActivity() {
 
         binding.buttonAddGame.setOnClickListener{
             addGameDialog.show()
+        }
+
+        binding.buttonSubscribe.setOnClickListener{
+            viewModel.subscribeMarotagens()
+        }
+
+        binding.buttonUnsubscribe.setOnClickListener{
+            viewModel.unsubscribeMarotagens()
         }
     }
 

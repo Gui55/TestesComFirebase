@@ -1,25 +1,22 @@
 package com.example.appmaroto.ui.activity
 
 import android.app.ComponentCaller
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appmaroto.model.Game
 import com.example.appmaroto.ResultStatus
 import com.example.appmaroto.databinding.ActivityMainBinding
 import com.example.appmaroto.googleSignInClient
 import com.example.appmaroto.snackbar
 import com.example.appmaroto.ui.viewmodel.LoginViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.SignInButton
-import com.google.firebase.Firebase
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.firestore.firestore
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,7 +43,6 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(client.signInIntent, RC_SIGN_IN)
         }
 
-
 //            .addOnSuccessListener {
 //                Log.i("GAAAMES", "Sucesso")
 //            }
@@ -72,6 +68,11 @@ class MainActivity : AppCompatActivity() {
         binding.buttonRegister.setOnClickListener{
             startActivity(Intent(this, CadastroActivity::class.java))
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.checkDeviceTokenStatus(this)
     }
 
     private fun loginAction() {

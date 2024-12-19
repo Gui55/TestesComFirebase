@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -18,6 +21,14 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    val properties = Properties()
+    val urlFile = file("../url.properties")
+    if (urlFile.exists()) {
+        properties.load(FileInputStream(urlFile))
+    }
+    val baseUrl = properties.getProperty("BASE_URL")
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,11 +36,16 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
         }
     }
 
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
 
     compileOptions {
@@ -52,6 +68,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(platform(libs.google.firebase.bom))
+    implementation(libs.firebase.messaging)
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.auth)
     // Koin for Android
@@ -60,6 +77,16 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.firebase.ui.auth)
     implementation(libs.play.services.auth)
+    implementation(libs.firebase.inappmessaging.display)
 
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.datastore.preferences)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
+
 }
